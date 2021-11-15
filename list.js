@@ -20,10 +20,10 @@ var firebaseConfig = {
   
   function show_name()
   {
-      var username = localStorage.getItem("username");
+      username = localStorage.getItem("username");
       document.getElementById("welcome_head").innerHTML = "Welcome " + username;
   
-      function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("all_lists").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
+      function getData() {firebase.database().ref(username).on('value', function(snapshot) {document.getElementById("all_lists").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
           Room_names = childKey;
          //Start code
          console.log("RoomNames", Room_names);
@@ -44,9 +44,9 @@ var firebaseConfig = {
       rname = document.getElementById("new_room").value;
       localStorage.setItem("room_name", rname);
   
-      firebase.database().ref("/").child(rname).update({
+      firebase.database().ref(username).child(rname).update({
           purpose: "adding room name"
       });
   
-      window.location = "chat_page.html";
+      window.location = "items_page.html";
   }
